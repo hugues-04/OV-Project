@@ -26,6 +26,7 @@ openai = "^1.31.1"
 tiktoken = "^0.7.0"
 sentencepiece = "^0.2.0"
 chroma = "^0.2.0"
+langchain-cohere = "^0.1.5"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"

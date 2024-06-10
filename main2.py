@@ -8,6 +8,12 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import retrieval_qa
 from langchain.chains.question_answering import load_qa_chain
 import cohere
+
+# from langchain_cohere import ChatCoher
+from langchain_cohere.llms import Cohere
+from langchain.retrievers import CohereRagRetriever
+from langchain_cohere import CohereEmbeddings
+from langchain.retrievers.document_compressors import CohereRerank
 import os
 
 
@@ -54,6 +60,14 @@ def summarize_text_with_cohere(
     )
     summary = response.generations[0].text.strip()
     return summary
+
+
+def response_to_question(question, vectorb):
+    docs = vectorb.similarity_search(question)
+    llm = ChatCoher(cohere_api_key="aNQr5ZTkCl5cV76YlLCktgp3xWpTsvMeLgGOCYsN")
+    hain = load_qa_chain(llm, chain_type="stuff")
+    ansxer = chain.run(input_documents=docs, question=question)
+    return ansxer
 
 
 def get_conversation_chain(
