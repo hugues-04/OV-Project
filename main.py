@@ -41,17 +41,17 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
                 #     st.write("Vecteurs générés :", vectorstore)
 
     with st.container():
-        # # Generate summaries for each chunk
-        # summaries = [
-        #     summarize_text_with_cohere(chunk, cohere_client) for chunk in text_chunks
-        # ]
-        # st.subheader("Résumé du document")
-        # for i, summary in enumerate(summaries):
-        #     st.write(f"Résumé du morceau {i+1}: {summary}")
-        # conversation = get_conversation_chain(vectorstore, "bonjour", cohere_api_key)
-        # if question:
-        #     response = conversation({"question": question})
-        #     st.write(response["answer"])
+        # Generate summaries for each chunk
+        summaries = [
+            summarize_text_with_cohere(chunk, cohere_client) for chunk in text_chunks
+        ]
+        st.subheader("Résumé du document")
+        for i, summary in enumerate(summaries):
+            st.write(f"Résumé du morceau {i+1}: {summary}")
+        conversation = get_conversation_chain(vectorstore, "bonjour", cohere_api_key)
+        if question:
+            response = conversation({"question": question})
+            st.write(response["answer"])
 
         if question:
             vectordb = st.session_state.vectorstore
